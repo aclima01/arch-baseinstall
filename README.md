@@ -11,14 +11,18 @@ loadkeys br-abnt2
 iwctl
 ~~~
 ~~~root@archiso_$
-_station {wlan0} scan # buscar redes próximas_
-_station {wlan0} connect {NomeDaRede}_
+station {wlan0} scan // buscar redes próximas
+station {wlan0} connect {NomeDaRede}
 ~~~
 3. visualizar discos disponiveis
-_lsblk_
+~~~root@archiso_$
+lsblk
+~~~
 
 4. entra no modo de gerenciamento de disco (particionamento)
-_cfdisk /dev/{sda}_
+~~~root@archiso_$
+cfdisk /dev/{sda}
+~~~
 
 Tamanho   | Tipo
 --------- | ------
@@ -28,10 +32,12 @@ Tamanho   | Tipo
 XXG  | /home
 
 5. formatação das partições
-_mkfs.vfat /dev/{sda1}_   ###### cria partição de boot
-_mkswap /dev/{sda2}_      ###### cria partição de swap
-_mkfs.ext4 /dev/{sda3}_   ###### cria partição do sistema + home
-_mkfs.ext4 /dev/{sda4}_   ###### cria partição do sistema + home
+~~~root@archiso_$
+mkfs.vfat /dev/{sda1}   // cria partição de boot
+mkswap /dev/{sda2}      // cria partição de swap
+mkfs.ext4 /dev/{sda3}   // cria partição do sistema + home
+mkfs.ext4 /dev/{sda4}   // cria partição do sistema + home
+~~~
 
 6. criar pontos de montagem
 _mount /dev/{sda3} /mont_         ###### /root
