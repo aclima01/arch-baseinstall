@@ -11,8 +11,8 @@ $ loadkeys br-abnt2
 $ iwctl
 ~~~
 ~~~root@archiso_$
-**[iwctl]** station {wlan0} scan // buscar redes próximas
-**[iwctl]** station {wlan0} connect {NomeDaRede}
+[iwctl] $ station {wlan0} scan // buscar redes próximas
+[iwctl] $ station {wlan0} connect {NomeDaRede}
 ~~~
 3. visualizar discos disponiveis
 ~~~root@archiso_$
