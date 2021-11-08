@@ -7,11 +7,13 @@ loadkeys br-abnt2
 ~~~
 
 2. conecta a internet pelo wifi
-_iwctl_
-
+~~~root@archiso_$
+iwctl
+~~~
+~~~root@archiso_$
 _station {wlan0} scan # buscar redes próximas_
 _station {wlan0} connect {NomeDaRede}_
-
+~~~
 3. visualizar discos disponiveis
 _lsblk_
 
