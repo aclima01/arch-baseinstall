@@ -2,7 +2,9 @@
 
 
 1. carrega layout do teclado
-* _loadkeys br-abnt2_
+~~~ root@archiso $
+_loadkeys br-abnt2_
+~~~
 
 2. conecta a internet pelo wifi
 _iwctl_
