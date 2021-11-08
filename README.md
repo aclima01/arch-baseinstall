@@ -2,8 +2,8 @@
 
 
 1. carrega layout do teclado
-~~~ root@archiso $
-_loadkeys br-abnt2_
+~~~root@archiso_$
+loadkeys br-abnt2
 ~~~
 
 2. conecta a internet pelo wifi
