@@ -2,98 +2,97 @@
 
 #### --------------------------------------------------
 ### carrega layout do teclado
-loadkeys br-abnt2
+_loadkeys br-abnt2_
 
 #### --------------------------------------------------
 ### conecta a internet pelo wifi
-iwctl
+_iwctl_
 
-station {wlan0} scan # buscar redes próximas
-station {wlan0} connect {NomeDaRede}
+_station {wlan0} scan # buscar redes próximas_
+_station {wlan0} connect {NomeDaRede}_
 
 #### --------------------------------------------------
 ### visualizar discos disponiveis
-lsblk
+_lsblk_
 
 #### --------------------------------------------------
 ### entra no modo de gerenciamento de disco (particionamento)
-ˋˋˋ
-cfdisk /dev/{sda}
-ˋˋˋ
->300M - EFI System
->23G - SWAP
->30G - /root
->XXG - /home
+_cfdisk /dev/{sda}_
+
+Tamanho   | Tipo
+--------- | ------
+300M | EFI System
+23G  | Linux Swap
+30G  | /
+XXG  | /home
 
 #### --------------------------------------------------
 ### formatação das partições
-mkfs.vfat /dev/{sda1}   # cria partição de boot
-mkswap /dev/{sda2}      # cria partição de swap
-mkfs.ext4 /dev/{sda3}   # cria partição do sistema + home
-mkfs.ext4 /dev/{sda4}   # cria partição do sistema + home
+_mkfs.vfat /dev/{sda1}_   ###### cria partição de boot
+_mkswap /dev/{sda2}_      ###### cria partição de swap
+_mkfs.ext4 /dev/{sda3}_   ###### cria partição do sistema + home
+_mkfs.ext4 /dev/{sda4}_   ###### cria partição do sistema + home
 
 #### --------------------------------------------------
 ### criar pontos de montagem
 
-mount /dev/{sda3} /mont         # /root
+_mount /dev/{sda3} /mont_         ###### /root
 
-swapon /dev/{sda2}              # swap
+_swapon /dev/{sda2}_              ###### swap
 
-mkdir -p /mnt/boot/efi          # boot 
-mount /dev/{sda1} /mnt/boot/efi
+_mkdir -p /mnt/boot/efi_          ###### boot 
+_mount /dev/{sda1} /mnt/boot/efi_
 
-mkdir /mnt/home                 # /home
-mount /dev/{sda4} /mnt/home
+_mkdir /mnt/home_                 ###### /home
+_mount /dev/{sda4} /mnt/home_
 
 #### --------------------------------------------------
 ### instalação dos pacotes basicos na partição root
-pacstrap /mnt base linux linux-firmware git vim intel-ucode
+_pacstrap /mnt base linux linux-firmware git vim intel-ucode_
 
 #### --------------------------------------------------
 ### criação do arquivo de fstab baseados no UUID das partcições
-genfstab -U /mnt >> /mnt/etc/fstab
+_genfstab -U /mnt >> /mnt/etc/fstab_
 
 #### --------------------------------------------------
 ### entrar no sistema pelas partições criadas e visualizar fstab
-arch-chroot /mnt
-cat /mnt/etc/fstab
+_arch-chroot /mnt_
+_cat /mnt/etc/fstab_
 
 #### --------------------------------------------------
 ### obter script de instalação
-git clone https://github.com/alima01/arch-baseinstall
-cd arch-baseinstall
-vim base-uefi.sh        # alterar senhas e comandos necessários
-chmod +x base-uefi.sh   # torna o script executável
-cd /
-./arch-baseinstall/base-uefi.sh # executa o script
+_git clone https://github.com/alima01/arch-baseinstall_
+_cd arch-baseinstall_
+_vim base-uefi.sh_        ###### alterar senhas e comandos necessários
+_chmod +x base-uefi.sh_   ###### torna o script executável
+_cd /_
+_./arch-baseinstall/base-uefi.sh ###### executa o script_
 
 #### --------------------------------------------------
 ### ajustar e criar mkinitcpio
-vim /etc/mkinitcpio.conf # Linha 7 : "MODULES=(i915 nvidia)"
-mkinitcpio -p linux
+_vim /etc/mkinitcpio.conf_    ###### Linha 7 : "MODULES=(i915 nvidia)"
+_mkinitcpio -p linux_
 
 #### --------------------------------------------------
 ### criar configurações do grub
-grub-mkconfig -o /boot/grub/grub.cfg
+_grub-mkconfig -o /boot/grub/grub.cfg_
 
 #### --------------------------------------------------
 ### Tudo Ok! Sair, desmontar e reiniciar
-exit
-umount -R /mnt
-reboot
+_exit_
+_umount -R /mnt_
+_reboot_
 
 #### --------------------------------------------------
 ### Remover pendrive - Check grub menu e login
 ### aqui deve já aparecer o tty para login
-username
-password
+_{username}_
+_{password}_
 
 #### --------------------------------------------------
 ### Conexão wifi no novo sistema
-nmtui # Activate a connection, conectar no wifi desejado
+_nmtui_       ###### "Activate a connection" ==> conectar no wifi desejado
 
 #### --------------------------------------------------
 ### Desktop
-cp -r /arch-baseinstall .   # copiar script para /home
-
-Meu script básico de instalação para execução após chroot no Arch Linux
+_cp -r /arch-baseinstall ._   ###### copiar script para /home
