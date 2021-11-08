@@ -17,11 +17,13 @@ lsblk
 
 #### --------------------------------------------------
 ### entra no modo de gerenciamento de disco (particionamento)
+ˋˋˋ
 cfdisk /dev/{sda}
-## 300M - EFI System
-## 23G - SWAP
-## 30G - /root
-## XXG - /home
+ˋˋˋ
+>300M - EFI System
+>23G - SWAP
+>30G - /root
+>XXG - /home
 
 #### --------------------------------------------------
 ### formatação das partições
